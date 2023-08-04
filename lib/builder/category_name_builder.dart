@@ -8,15 +8,15 @@ Padding category_name_builder(String name) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              Text("$name",style: Styletext.categoryStyle(),),
+              Text("$name",style: Styletext.categoryStyle,),
               Container(
                 width: 72,
                 height: 24,
                 decoration: BoxDecoration(
                   color: const Color(0xFF333333),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius:BorderRadius.circular(16),
                 ),
-                child: Center(child: Text("View Al",style: Styletext.viewAlStyle(),)),
+                child: Center(child: Text("View Al",style: Styletext.viewAlStyle,)),
               ),
             ],),
           );

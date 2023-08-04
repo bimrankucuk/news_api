@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'page/MyHomePage.dart';
 
@@ -15,7 +16,18 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
- primarySwatch: Colors.blue,
+         iconButtonTheme: IconButtonThemeData(style: ButtonStyle(
+          iconColor:MaterialStatePropertyAll(Colors.amber)
+         )),
+         primarySwatch: Colors.blue, 
+         appBarTheme: AppBarTheme(
+  backgroundColor: Colors.transparent,
+  systemOverlayStyle: SystemUiOverlayStyle.light,
+  titleTextStyle: TextStyle(color: Colors.white,fontSize: 32,fontWeight: FontWeight.bold),
+  actionsIconTheme: IconThemeData()
+  
+   ),
+
       ),
       home: const MyHomePage(),
     );

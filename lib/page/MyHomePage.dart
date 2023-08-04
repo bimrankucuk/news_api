@@ -5,7 +5,6 @@ import 'package:news/services/Services.dart';
 
 import '../builder/buttombar_builder.dart';
 import '../builder/category_name_builder.dart';
-import '../builder/icon_homepage_builder.dart';
 import '../builder/news_info_builder.dart';
 
 
@@ -22,30 +21,26 @@ class _MyHomePageState extends State<MyHomePage> {
   // ignore: non_constant_identifier_names
   List<Articles> articles_list_sport=[];
  
-  @override
-  void initState() {
-    _services.get_news_general().then((value) {
+ void _callServices(String key){
+   _services.get_news(key).then((value) {
       // ignore: unnecessary_null_comparison
       if(value!=null){
         setState(() {
-          articals=value ;
-        });       
-      }else{
-        throw Exception("value null");
-      }
-
-    });
-     _services.get_news_sport().then((value) {
-      // ignore: unnecessary_null_comparison
-      if(value!=null){
-        setState(() {
-          articles_list_sport=value ;
+         key=="sport"? articles_list_sport=value : articals=value;
         });      
       }else{
         throw Exception("value null");
       }
 
     });
+
+ }
+
+  @override
+  void initState() {
+    _callServices("sport");
+ 
+   _callServices("general");
     super.initState();
   }
  
@@ -54,6 +49,19 @@ class _MyHomePageState extends State<MyHomePage> {
     var screen_size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color(0xFF000000),
+      appBar: AppBar(
+       
+        actions: [
+          
+          IconButton(onPressed: null, icon:Icon(FontAwesomeIcons.magnifyingGlass,) ),
+          IconButton(onPressed: null, icon:Icon(Icons.abc_sharp,color: Colors.white,) ),
+          IconButton(onPressed: null, icon:Icon(FontAwesomeIcons.bars,) ),
+        
+        ],
+        title: Text("News"),
+
+
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,22 +69,22 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               children: [
 
-                 //row newsText and ıcons
-                 Padding(
-                padding: const EdgeInsets.only(top: 58,left: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("News",style: Styletext.newsStyle(),),
-                    Row(children: [
-                    icon_homepage(FontAwesomeIcons.magnifyingGlass),
-                    icon_homepage(FontAwesomeIcons.star),
-                    icon_homepage(FontAwesomeIcons.bars),
-                    ],)
-                  ],
-                ),
-              ),
-              //news result 
+              //    //row newsText and ıcons
+              //    Padding(
+              //   padding: const EdgeInsets.only(top: 58,left: 16),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text("News",style: Styletext.newsStyle(),),
+              //       Row(children: [
+              //       icon_homepage(FontAwesomeIcons.magnifyingGlass),
+              //       icon_homepage(FontAwesomeIcons.star),
+              //       icon_homepage(FontAwesomeIcons.bars),
+              //       ],)
+              //     ],
+              //   ),
+              // ),
+              // //news result 
               Column(children: [
 
                 //category name and icon
@@ -107,8 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Styletext {
- static    TextStyle newsStyle() => const TextStyle(fontWeight: FontWeight.w700,fontSize: 32 , color: Color(0xFFE0E0E0));
- static    TextStyle categoryStyle() => const TextStyle(fontWeight: FontWeight.w600,fontSize: 24 , color: Color(0xFFE0E0E0));
- static    TextStyle viewAlStyle() => const TextStyle(fontWeight: FontWeight.w600,fontSize:11 ,color: Color(0xFFE0E0E0));
+  static Color ColorWhit = Color(0xFFE0E0E0);
+ static    TextStyle newsStyle =  TextStyle(fontWeight: FontWeight.w700,fontSize: 32 , color: ColorWhit );
+ static    TextStyle categoryStyle = TextStyle(fontWeight: FontWeight.w600,fontSize: 24 , color: ColorWhit);
+ static    TextStyle viewAlStyle =  TextStyle(fontWeight: FontWeight.w600,fontSize:11 ,color: ColorWhit);
 
 }
