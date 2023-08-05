@@ -27,7 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if(value!=null){
         setState(() {
          key=="sport"? articles_list_sport=value : articals=value;
-        });      
+        });
       }else{
         throw Exception("value null");
       }
